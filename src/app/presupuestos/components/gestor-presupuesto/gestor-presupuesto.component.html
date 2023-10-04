@@ -25,9 +25,11 @@
 
 
 <div class="grid mx-8 justify-content-center">
-  <div *ngIf="loading()" class="flex block justify-content-center mt-5">
+
+  <div *ngIf="loading()" class="flex w-full justify-content-center mt-5">
     <p-progressSpinner class="mx-auto" strokeWidth="6" aria-label="Loading"></p-progressSpinner>
   </div>
+
   <h2 *ngIf="gastos().length === 0 && !loading()"
     class="bg-primary-reverse p-5 border-round w-full"
   >Aún no tienes gastos...</h2>
