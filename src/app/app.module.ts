@@ -10,6 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { PresupuestosModule } from './presupuestos/presupuestos.module';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     PresupuestosModule,
     BrowserAnimationsModule,
     ButtonModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

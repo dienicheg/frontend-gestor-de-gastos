@@ -14,6 +14,7 @@ import { CardModule } from 'primeng/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { GestorPresupuestoComponent } from './components/gestor-presupuesto/gestor-presupuesto.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -31,8 +32,8 @@ import { GestorPresupuestoComponent } from './components/gestor-presupuesto/gest
     MenubarModule,
     PresupuestosRoutingModule,
     ProgressBarModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    ProgressSpinnerModule
   ]
 })
 export class PresupuestosModule { }

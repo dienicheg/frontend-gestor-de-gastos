@@ -42,6 +42,9 @@ export class ConfigService {
   private _gastos = signal<GetGastoResponse[]>([])
   public gastos = computed(() => this._gastos())
 
+  private _loading = signal<boolean>(false)
+  public loading = computed<boolean>(() => this._loading())
+
   constructor() {
     this.checkAuthStatus().subscribe()
   }
@@ -98,6 +101,8 @@ export class ConfigService {
   }
 
   getGastos() {
+    this._loading.set(true)
+
     const headers = new HttpHeaders()
     .set('Authorization', `Bearer ${ localStorage.getItem('token') }`);
     const url = `${this.baseUrl}/gastos`
@@ -106,11 +111,15 @@ export class ConfigService {
         map((gastos) => {
           this._totalGastado.set(gastos.reduce(( accumulator, gasto ) => accumulator + gasto.cantidad, 0))
           this._gastos.set(gastos)
-        })
+          this._loading.set(false)
+        }),
+        catchError(() => of(this._loading.set(false)))
       ).subscribe()
   }
 
   updatePresupuesto(body: { presupuesto: number }) {
+    this._loading.set(true)
+
     const headers = new HttpHeaders()
     .set('Authorization', `Bearer ${ localStorage.getItem('token') }`);
     const url = `${this.baseUrl}/user/${this.currentUser()?._id}`
@@ -119,8 +128,10 @@ export class ConfigService {
       .pipe(
         map(user => {
           this._currentUser.set(user)
+          this._loading.set(false)
         }),
-        catchError(err => throwError(() => err.error.msg))
+        catchError(() => of(this._loading.set(false)))
+
       ).subscribe()
   }
 
@@ -134,7 +145,7 @@ export class ConfigService {
           this._gastos.set([...this._gastos(), gasto])
           this._totalGastado.set(this.gastos().reduce(( accumulator, gasto ) => accumulator + gasto.cantidad, 0))
         }),
-        catchError(err => throwError(() => err.error.message))
+        catchError(() => of(this._loading.set(false)))
       ).subscribe()
   }
 
@@ -149,7 +160,7 @@ export class ConfigService {
           this._gastos.set([...this._gastos(), updatedGasto])
           this._totalGastado.set(this.gastos().reduce(( accumulator, gasto ) => accumulator + gasto.cantidad, 0))
         }),
-        catchError(err => throwError(() => err.error.message))
+        catchError(() => of(this._loading.set(false)))
       ).subscribe()
   }
 
@@ -164,7 +175,7 @@ export class ConfigService {
           this._gastos.set(this._gastos().filter(gasto => gasto._id !== id))
           this._totalGastado.set(this.gastos().reduce(( accumulator, gasto ) => accumulator + gasto.cantidad, 0))
         }),
-        catchError(err => throwError(() => err))
+        catchError(() => of(this._loading.set(false)))
       ).subscribe()
   }
 

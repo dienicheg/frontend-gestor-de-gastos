@@ -28,6 +28,7 @@ export class GestorPresupuestoComponent implements OnInit {
     return +nuevoPorcentaje
   })
 
+  loading = computed(() => this.configService.loading())
 
   visible: boolean = false
 

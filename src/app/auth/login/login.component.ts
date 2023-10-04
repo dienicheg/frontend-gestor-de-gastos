@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { emailPattern } from '../helpers/paterns';
 import { ConfigService } from 'src/app/config/config.service';
@@ -23,25 +23,33 @@ export class LoginComponent {
   public loginErrorMessage = signal<string|null>(null)
   public handleError = signal<boolean>(false)
 
+  public visibleSpinner = false
+
   onSubmit(e: Event){
     e.preventDefault()
     this.myForm.markAllAsTouched()
 
     if(this.myForm.valid) {
+
+      this.visibleSpinner = true
+
       const body = {
         email: this.myForm.controls.email.value!,
         password: this.myForm.controls.password.value!,
       }
       this.configService.loginUser(body).subscribe({
         next: () => {
+          this.visibleSpinner = false
           this.handleError.set(false)
           this.router.navigateByUrl('/presupuestos')
         },
         error: (message) => {
+          this.visibleSpinner = false
           this.loginErrorMessage.set(message)
           this.handleError.set(true)
         }
       })
+
 
     }
   }
@@ -69,9 +77,6 @@ export class LoginComponent {
 
     return null;
   }
-
-
-
 
 
 }

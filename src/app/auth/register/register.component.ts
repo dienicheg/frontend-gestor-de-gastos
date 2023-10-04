@@ -28,11 +28,17 @@ export class RegisterComponent {
   public handleSuccess = signal<boolean>(false)
   public registerSuccessMessage = signal<string|null>(null)
 
+  public visibleSpinner = false
+
+
   onSubmit(e: Event){
     e.preventDefault()
     this.myForm.markAllAsTouched()
 
     if(this.myForm.valid) {
+      this.visibleSpinner = true
+
+
       const body = {
         name: this.myForm.controls.name.value!,
         email: this.myForm.controls.email.value!,
@@ -43,6 +49,7 @@ export class RegisterComponent {
           this.handleError.set(false)
           this.handleSuccess.set(true)
           this.registerSuccessMessage.set(msg)
+          this.visibleSpinner = false
           setTimeout(() => {
             this.router.navigateByUrl('/auth/login')
           }, 1500);
@@ -53,6 +60,7 @@ export class RegisterComponent {
           this.registerErrorMessage.set(message)
         }
       })
+
 
 
     }
