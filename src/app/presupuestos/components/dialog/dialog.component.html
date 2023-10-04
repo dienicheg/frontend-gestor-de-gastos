@@ -1,0 +1,75 @@
+<button
+  pButton
+  class="text-xl mx-3 {{gasto ? 'p-button-outlined p-button-warning' : 'p-button-outlined'}}"
+  label="{{gasto ? 'Editar' : 'Agregar Gasto'}}"
+  (click)="showDialog(gasto)"
+></button>
+
+<p-dialog header="Agregar Gasto" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit($event)"
+    class="justify-content-center align-content-center surface-50 p-3 border-round m-auto"
+    method="post"
+  >
+
+
+    <div class="pb-3">
+      <label class="text-xl text-primary font-semibold"
+      for="nombre">Nombre:</label>
+      <input
+        formControlName="nombre"
+        type="text"
+        id="nombre"
+        name="nombre"
+        class="w-full p-2 mt-1 border-round text-xl"
+        placeholder="Ingresa nombre del gasto"
+      >
+      <span
+        *ngIf="isValidField(myForm.controls.nombre)"
+        class="text-red-600 font-bold text-xl">
+        {{getFieldError(myForm.controls.nombre)}}
+      </span>
+    </div>
+
+    <div class="pb-3">
+      <label class="text-xl text-primary font-semibold"
+      for="cantidad">Cantidad:</label>
+      <input
+        formControlName="cantidad"
+        type="number"
+        id="cantidad"
+        name="cantidad"
+        class="w-full p-2 mt-1 border-round text-xl"
+        placeholder="Ingresa cantidad">
+      <span
+        *ngIf="isValidField(myForm.controls.cantidad)"
+        class="text-red-600 font-bold text-xl ">
+        {{getFieldError(myForm.controls.cantidad)}}
+      </span>
+    </div>
+
+    <div class="pb-3 flex flex-column">
+      <label class="text-xl text-primary font-semibold"
+      for="categoria">Categoria: </label>
+      <select name="categoria" id="categoria" formControlName="categoria"
+        class="p-2 mt-2 text-lg"
+      >
+        <option value="">--- Elige una Categoría ---</option>
+        <option value="ahorro">Ahorro</option>
+        <option value="comida">Comida</option>
+        <option value="casa">Casa</option>
+        <option value="salud">Salud</option>
+        <option value="ocio">Ocio</option>
+        <option value="gastos-varios">Gastos Varios</option>
+        <option value="suscripciones">Suscripciones</option>
+      </select>
+      <span
+        *ngIf="isValidField(myForm.controls.categoria)"
+        class="text-red-600 font-bold text-xl ">
+        {{getFieldError(myForm.controls.categoria)}}
+      </span>
+    </div>
+
+    <input  type="submit" value="{{gasto ? 'Guardar Cambios' : 'Agregar Gasto'}}" class="my-3 p-3 border-round text-xl bg-primary-reverse font-bold cursor-pointer">
+  </form>
+</p-dialog>

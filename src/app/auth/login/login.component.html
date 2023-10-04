@@ -1,0 +1,53 @@
+<h3 class="text-4xl text-center">Inicia Sesión</h3>
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit($event)"
+  class="justify-content-center align-content-center surface-50 p-3 border-round w-12 md:w-9 lg:w-3 m-auto"
+  method="post"
+>
+<span *ngIf="handleError()"
+  class="text-red-600 font-bold text-xl"
+>{{loginErrorMessage()}}</span>
+  <div class="pb-3">
+    <label class="text-xl text-primary font-semibold"
+    for="email">Email:</label>
+    <input
+      formControlName="email"
+      type="email"
+      id="email"
+      name="email"
+      class="w-full p-2 mt-1 border-round text-xl"
+      placeholder="Ingresa tu email">
+    <span
+      *ngIf="isValidField(myForm.controls.email)"
+      class="text-red-600 font-bold text-xl ">
+      {{getFieldError(myForm.controls.email)}}
+    </span>
+  </div>
+
+  <div class="pb-3">
+    <label class="text-xl text-primary font-semibold"
+    for="password">Contraseña:</label>
+    <input
+      formControlName="password"
+      type="password"
+      id="password"
+      name="password"
+      class="w-full p-2 mt-1 border-round text-xl"
+      placeholder="Ingresa tu contraseña">
+    <span
+      *ngIf="isValidField(myForm.controls.password)"
+      class="text-red-600 font-bold text-xl">
+      {{getFieldError(myForm.controls.password)}}
+    </span>
+  </div>
+
+
+  <input type="submit" value="Iniciar Sesión" class="my-3 p-3 border-round text-xl bg-primary-reverse font-bold cursor-pointer">
+</form>
+
+<div class="pt-2 w-12 md:w-9 lg:w-3 m-auto">
+  <a
+    class="text-primary"
+    href="/auth/register"
+  >¿No tienes cuenta? Crea una.</a>
+</div>

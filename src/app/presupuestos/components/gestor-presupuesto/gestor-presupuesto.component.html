@@ -1,0 +1,73 @@
+<div class="w-4 mx-auto border-round border-2 border-primary mt-8">
+  <div class="flex justify-content-center">
+    <p class="text-3xl font-bold text-primary text-center">Presupuesto: <span class="text-white">{{presupuesto() | currency}}</span></p>
+    <button class="ml-2 h-min my-auto text-xl font-bold border-round cursor-pointer p-button-outlined"
+      (click)="showDialog()"
+      icon="pi pi-pencil"
+      pButton
+    ></button>
+  </div>
+  <p class="text-3xl font-bold text-primary text-center">Disponible: <span class="text-white">{{disponible() | currency}}</span></p>
+  <p class="text-3xl font-bold text-primary text-center">Gastado: <span class="text-white">{{totalGastado() | currency}}</span></p>
+
+  <div class="m-2">
+    <h3 class="text-center">{{porcentajeGastado()}}% Gastado</h3>
+    <p-progressBar color="" [showValue]="false" [value]="porcentajeGastado()"></p-progressBar>
+  </div>
+
+</div>
+
+
+<div class="flex my-5">
+  <app-dialog class="mx-auto"></app-dialog>
+</div>
+
+
+
+<div class="grid mx-8 justify-content-center">
+
+  <h2 *ngIf="gastos().length === 0"
+    class="bg-primary-reverse p-5 border-round w-full"
+  >Aún no tienes gastos...</h2>
+  <div *ngFor="let gasto of gastos()" class="col-4 border-round-2xl bg-primary-reverse flex justify-content-between m-3">
+    <div class="w-6">
+      <h3>{{gasto.categoria | uppercase}}</h3>
+      <h2>{{gasto.nombre}}</h2>
+      <h3>Agregado el: <span class="font-normal">{{gasto.createdAt}}</span></h3>
+    </div>
+    <div class="flex flex-column justify-content-between my-3">
+      <span class="font-bold text-3xl text-center">{{gasto.cantidad | currency}}</span>
+      <div class="flex justify-content-between">
+        <app-dialog [gasto]="gasto"></app-dialog>
+        <button pButton (click)="onDelete(gasto._id)"
+        class="text-xl font-semibold cursor-pointer border-round p-2 mx-1 p-button-outlined p-button-danger">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <p-dialog header="Editar Presupuesto" [(visible)]="visible" [draggable]="false" [style]="{width: '50vw'}">
+    <form
+    [formGroup]="myForm" (ngSubmit)="onSubmit($event)"
+    class="flex flex-column"
+    >
+
+      <input type="number" min="0"
+        id="presupuesto"
+        formControlName="presupuesto"
+        class="text-center text-5xl my-5"
+      >
+
+      <input type="submit" value="Guardar Cambios"
+      class="p-2 border-round cursor-pointer"
+      >
+
+      <span
+        *ngIf="myForm.invalid && myForm.touched"
+        class="text-red-600 font-bold text-2xl text-center mt-5">
+        El presupuesto no puede ser 0
+      </span>
+    </form>
+  </p-dialog>
+</div>

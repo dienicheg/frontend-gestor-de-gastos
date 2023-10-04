@@ -1,0 +1,34 @@
+
+<app-navbar></app-navbar >
+
+<div *ngIf="this.user()?.presupuesto === 0"
+>
+  <form
+    [formGroup]="myForm" (ngSubmit)="onSubmit($event)"
+    class="bg-primary-reverse mx-auto w-4 flex flex-column p-5 border-round mt-8"
+  >
+
+  <label for="presupuesto"
+  class="text-center w-full text-5xl font-bold"
+    >Definir Presupuesto</label>
+
+    <input type="number" min="0"
+      id="presupuesto"
+      formControlName="presupuesto"
+      class="text-center text-5xl my-5"
+    >
+
+    <input type="submit" value="Guardar"
+    class="p-2 border-round cursor-pointer"
+    >
+
+    <span
+      *ngIf="myForm.invalid && myForm.touched"
+      class="text-red-600 font-bold text-2xl text-center mt-5">
+      El presupuesto no puede ser 0
+    </span>
+  </form>
+
+</div>
+
+<app-gestor-presupuesto *ngIf="this.user()?.presupuesto !== 0"></app-gestor-presupuesto>
