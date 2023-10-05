@@ -1,4 +1,4 @@
-<div class="w-4 mx-auto border-round border-2 border-primary mt-8">
+<div class="md:w-8 lg:w-4 mx-auto border-round border-2 border-primary mt-8">
   <div class="flex justify-content-center">
     <p class="text-3xl font-bold text-primary text-center">Presupuesto: <span class="text-white">{{presupuesto() | currency}}</span></p>
     <button class="ml-2 h-min my-auto text-xl font-bold border-round cursor-pointer p-button-outlined"
@@ -33,8 +33,8 @@
   <h2 *ngIf="gastos().length === 0 && !loading()"
     class="bg-primary-reverse p-5 border-round w-full"
   >Aún no tienes gastos...</h2>
-  <div *ngFor="let gasto of gastos()" class="col-4 border-round-2xl bg-primary-reverse flex justify-content-between m-3">
-    <div class="w-6">
+  <div *ngFor="let gasto of gastos()" class="lg:col-4 border-round-2xl bg-primary-reverse flex justify-content-between  mb-5 lg:m-3 px-5">
+    <div class="w-full lg:w-6">
       <h3>{{gasto.categoria | uppercase}}</h3>
       <h2>{{gasto.nombre}}</h2>
       <h3>Agregado el: <span class="font-normal">{{gasto.createdAt}}</span></h3>
@@ -52,7 +52,7 @@
 
 
 
-  <p-dialog header="Editar Presupuesto" [(visible)]="visible" [draggable]="false" [style]="{width: '50vw'}">
+  <p-dialog header="Editar Presupuesto" [(visible)]="visible" [draggable]="false" [style]="{width: '50vw'}" [breakpoints]="{ '960px': '95vw' }">
     <form
     [formGroup]="myForm" (ngSubmit)="onSubmit($event)"
     class="flex flex-column"

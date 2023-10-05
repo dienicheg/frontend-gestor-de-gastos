@@ -5,7 +5,7 @@
   (click)="showDialog(gasto)"
 ></button>
 
-<p-dialog header="Agregar Gasto" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+<p-dialog header="Agregar Gasto" [(visible)]="visible" [modal]="true" [breakpoints]="{ '960px': '95vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
 
   <form [formGroup]="myForm" (ngSubmit)="onSubmit($event)"
     class="justify-content-center align-content-center surface-50 p-3 border-round m-auto"
