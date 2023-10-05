@@ -4,13 +4,14 @@
   class="surface-50 p-3 border-round w-12 md:w-9 lg:w-3 m-auto"
   method="post"
 >
-  <span *ngIf="handleError()"
-  class="text-red-600 font-bold text-xl"
-  >{{registerErrorMessage()}}</span>
-  <span *ngIf="handleSuccess()"
-  >
+  <p *ngIf="handleError()"
+  class="text-red-600 font-bold text-xl text-center border-round border-solid border-3 px-2 my-3"
+  >{{registerErrorMessage()}}</p>
+  <p *ngIf="registerSuccessMessage()"
+  class="text-primary font-bold text-xl text-center border-round border-solid border-3 px-2 my-3"
+  > Usuario registrado correctamente
     {{registerSuccessMessage()}}
-  </span>
+  </p>
   <div class="pb-3">
     <label class="text-xl text-primary font-semibold"
     for="name">Nombre:</label>
