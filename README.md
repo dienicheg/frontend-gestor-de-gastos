@@ -1,8 +1,15 @@
-# GestorPresupuestosFrontend
+### Gestor de Presupuestos Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
+## Development 
+1. Correr el backend del repositorio: https://github.com/dienicheg/backend-gestor-de-presupuesto
+2. Instalar dependencias
+```
+npm install
+```
+3. Configurar variables de entorno en el archivo "src/environments/environment.development.ts"
+4. Iniciar servidor local
+```
+npm run start
+```
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
