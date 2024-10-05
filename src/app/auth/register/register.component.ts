@@ -57,6 +57,7 @@ export class RegisterComponent {
         error: (message) => {
           this.handleSuccess.set(false)
           this.handleError.set(true)
+          this.visibleSpinner = false
           this.registerErrorMessage.set(message)
         }
       })
