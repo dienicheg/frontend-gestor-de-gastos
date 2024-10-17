@@ -13,7 +13,7 @@
   <div class="m-2">
     <h3 class="text-center">{{porcentajeGastado()}}% Gastado</h3>
     <p-progressBar 
-      [color]="(porcentajeGastado() ?? 0) >= 90 ? 'red' : ((porcentajeGastado() ?? 0) >= 70 ? 'yellow' : 'green')" 
+      [color]="(porcentajeGastado() ?? 0) >= 90 ? 'red' : ((porcentajeGastado() ?? 0) >= 70 ? 'yellow' : '')" 
       [showValue]="false" 
       [value]="porcentajeGastado()"
       ></p-progressBar>
